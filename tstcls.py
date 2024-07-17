@@ -1,5 +1,5 @@
 import inspect
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 from typing import Any
 
 from _pytest.fixtures import FixtureRequest
@@ -21,7 +21,7 @@ class TestClassBase:
         return fixtures
 
     @fixture(autouse=True, scope="class")
-    def init_class(self, request: FixtureRequest) -> None:
+    def init_class(self, request: FixtureRequest) -> Iterator[None]:
         setup_fixtures = self.find_fixtures(self.setup_test_class, request)
         teardown_fixtures = self.find_fixtures(self.teardown_test_class, request)
 
@@ -30,7 +30,7 @@ class TestClassBase:
         self.__class__.teardown_test_class(**teardown_fixtures)
 
     @fixture(autouse=True)
-    def init(self, request: FixtureRequest) -> None:
+    def init(self, request: FixtureRequest) -> Iterator[None]:
         setup_fixtures = self.find_fixtures(self.setup_test, request)
         teardown_fixtures = self.find_fixtures(self.teardown_test, request)
 
