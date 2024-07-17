@@ -43,6 +43,9 @@ line-length = 120
 lint.select = ["ANN", "I", "N", "UP", "PGH", "RUF", "F", "FA"]
 lint.ignore = ["E731", "ANN101", "ANN102", "RUF009"]
 
+[tool.ruff.lint.per-file-ignores]
+"**/{tests}/*" = ["ANN"]
+
 
 [[tool.mypy.overrides]]
 ignore_missing_imports = true

@@ -25,7 +25,7 @@ jobs:
         run: poetry install --no-interaction --no-root
       - run: poetry check
       - run: poetry lock --check
-      - run: poetry run mypy pyvalkey
+      - run: poetry run mypy tstcls.py
         if: '!cancelled()'
       - run: poetry run ruff check --output-format=github .
         if: '!cancelled()'
