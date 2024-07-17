@@ -8,7 +8,7 @@ line_length = 120
 
 [tool.poetry]
 name = "pytest-tstcls"
-version = "2022.1.1"
+version = "2024.3.1"
 description = "Test Class Base"
 authors = ["Singular Labs, Inc <devs@singular.net>"]
 license = "MIT"
@@ -26,3 +26,22 @@ pytest = "*"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+lint.select = ["ANN", "I", "N", "UP", "PGH", "RUF", "F", "FA"]
+lint.ignore = ["E731", "ANN101", "ANN102", "RUF009"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/{tests}/*" = ["ANN"]
+
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
