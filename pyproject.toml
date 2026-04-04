@@ -1,51 +1,70 @@
-[tool.black]
-line-length = 120
-target-version = ['py37', 'py38', 'py39']
-
-[tool.isort]
-profile = "black"
-line_length = 120
-
-[tool.poetry]
-name = "pytest-tstcls"
-version = "2024.3.1"
-description = "Test Class Base"
-authors = ["Singular Labs, Inc <devs@singular.net>"]
-license = "MIT"
+[project]
+name = "nrevah-tstcls"
+version = "1.0.0"
+description = "nrevah-tstcls: Test Class Base"
 readme = "README.md"
-repository = "https://github.com/singular-labs/tstcls"
-keywords = ["pytest", "test", "class", "base"]
-packages = [
-    { include = "tstcls.py" }
+authors = [
+    { name = "Netanel Revah" },
+]
+requires-python = ">=3.11"
+dependencies = [
+    "pytest>=7.0",
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.10"
-pytest = "*"
-
-[tool.poetry.group.dev.dependencies]
-mypy = "*"
-ruff = "*"
+[tool.uv.build-backend]
+module-name = "tstcls"
+module-root = ""
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.8.5,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "pip-audit>=2.0.0",
+    "pre-commit>=4.0.0",
+    "pytest>=8.3.4",
+    "ruff>=0.9.6",
+    "ty>=0.0.1a7",
+]
 
 [tool.pytest.ini_options]
 addopts = [
     "--import-mode=importlib",
 ]
 
+testpaths = "tests"
+
 [tool.ruff]
-target-version = "py310"
+target-version = "py311"
 line-length = 120
 
-lint.select = ["ANN", "I", "N", "UP", "PGH", "RUF", "F", "FA"]
-lint.ignore = ["E731", "ANN101", "ANN102", "RUF009"]
+lint.select = [
+    "ANN",
+    "E",
+    "F",
+    "FA",
+    "FURB",
+    "I",
+    "N",
+    "PGH",
+    "PERF",
+    "PL",
+    "RUF",
+    "UP",
+    "YTT",
+    "TC",
+]
+lint.ignore = [
+    "E731",
+    "RUF009",
+    "PLR0911",
+    "PLR0912",
+    "PLR0913",
+    "PLR0915",
+    "PLW2901",
+]
 
 [tool.ruff.lint.per-file-ignores]
-"**/{tests}/*" = ["ANN"]
-
-
-[[tool.mypy.overrides]]
-ignore_missing_imports = true
+"**/{tests}/*" = ["ANN", "PLR2004", "PLR0913", "E501"]
