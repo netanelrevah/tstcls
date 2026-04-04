@@ -1,6 +1,6 @@
 [project]
 name = "nrevah-tstcls"
-version = "1.0.0"
+version = "1.0.1"
 description = "nrevah-tstcls: Test Class Base"
 readme = "README.md"
 authors = [
